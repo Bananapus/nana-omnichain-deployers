@@ -322,7 +322,11 @@ contract JBOmnichainDeployer is
         });
 
         // Convert the 721 ruleset configurations to regular ruleset configurations.
-        JBRulesetConfig[] memory rulesetConfigurations = _from721Config(launchProjectConfig.rulesetConfigurations, hook);
+        // Then modify the ruleset configurations to use this deployer as a wrapper for the datasouce.
+        JBRulesetConfig[] memory rulesetConfigurations = _setup({
+            projectId: projectId,
+            rulesetConfigurations: _from721Config(launchRulesetsConfig.rulesetConfigurations, hook)
+        });
 
         // Launch the project, and sanity check the project ID.
         assert(
