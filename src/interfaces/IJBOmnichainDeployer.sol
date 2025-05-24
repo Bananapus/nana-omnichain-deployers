@@ -10,6 +10,7 @@ import {IJBRulesetDataHook} from "@bananapus/core/src/interfaces/IJBRulesetDataH
 import {JBRulesetConfig} from "@bananapus/core/src/structs/JBRulesetConfig.sol";
 import {JBTerminalConfig} from "@bananapus/core/src/structs/JBTerminalConfig.sol";
 import {REVSuckerDeploymentConfig} from "@rev-net/core/src/structs/REVSuckerDeploymentConfig.sol";
+
 import {JBDeployerHookConfig} from "../structs/JBDeployerHookConfig.sol";
 
 interface IJBOmnichainDeployer {
