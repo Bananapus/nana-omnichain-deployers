@@ -26,7 +26,7 @@ function launchProjectFor(
     JBRulesetConfig[] calldata rulesetConfigurations,
     JBTerminalConfig[] calldata terminalConfigurations,
     string calldata memo,
-    REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+    JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration
 )
     external
     returns (uint256 projectId, address[] memory suckers);
@@ -41,7 +41,7 @@ function launch721ProjectFor(
     JBDeploy721TiersHookConfig calldata deployTiersHookConfig,
     JBLaunchProjectConfig calldata launchProjectConfig,
     bytes32 salt,
-    REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+    JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration
 )
     external
     returns (uint256 projectId, IJB721TiersHook hook, address[] memory suckers);

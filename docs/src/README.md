@@ -16,7 +16,7 @@ For `forge` projects (not recommended):
 forge install Bananapus/nana-721-hook
 ```
 
-Add `@bananapus/721-hook/=lib/nana-721-hook/` to `remappings.txt`. You'll also need to install `nana-721-hook`'s dependencies and add similar remappings for them.
+Add `@bananapus/721-hook-v5/=lib/nana-721-hook/` to `remappings.txt`. You'll also need to install `nana-721-hook`'s dependencies and add similar remappings for them.
 
 ```bash
 curl -L https://foundry.paradigm.xyz | sh

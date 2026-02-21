@@ -191,7 +191,7 @@ Deploy new suckers for an existing project.
 ```solidity
 function deploySuckersFor(
     uint256 projectId,
-    REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+    JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration
 )
     external
     returns (address[] memory suckers);
@@ -201,7 +201,7 @@ function deploySuckersFor(
 |Name|Type|Description|
 |----|----|-----------|
 |`projectId`|`uint256`|The ID of the project to deploy suckers for.|
-|`suckerDeploymentConfiguration`|`REVSuckerDeploymentConfig`|The suckers to set up for the project.|
+|`suckerDeploymentConfiguration`|`JBSuckerDeploymentConfig`|The suckers to set up for the project.|
 
 
 ### launchProjectFor
@@ -221,7 +221,7 @@ function launchProjectFor(
     JBRulesetConfig[] memory rulesetConfigurations,
     JBTerminalConfig[] calldata terminalConfigurations,
     string calldata memo,
-    REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+    JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration
 )
     external
     returns (uint256 projectId, address[] memory suckers);
@@ -235,7 +235,7 @@ function launchProjectFor(
 |`rulesetConfigurations`|`JBRulesetConfig[]`|The rulesets to queue.|
 |`terminalConfigurations`|`JBTerminalConfig[]`|The terminals to set up for the project.|
 |`memo`|`string`|A memo to pass along to the emitted event.|
-|`suckerDeploymentConfiguration`|`REVSuckerDeploymentConfig`|The suckers to set up for the project. Suckers facilitate cross-chain token transfers between peer projects on different networks.|
+|`suckerDeploymentConfiguration`|`JBSuckerDeploymentConfig`|The suckers to set up for the project. Suckers facilitate cross-chain token transfers between peer projects on different networks.|
 
 **Returns**
 
@@ -256,7 +256,7 @@ function launch721ProjectFor(
     JBDeploy721TiersHookConfig calldata deployTiersHookConfig,
     JBLaunchProjectConfig calldata launchProjectConfig,
     bytes32 salt,
-    REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+    JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration
 )
     external
     returns (uint256 projectId, IJB721TiersHook hook, address[] memory suckers);
@@ -269,7 +269,7 @@ function launch721ProjectFor(
 |`deployTiersHookConfig`|`JBDeploy721TiersHookConfig`|Configuration which dictates the behavior of the 721 tiers hook which is being deployed.|
 |`launchProjectConfig`|`JBLaunchProjectConfig`|Configuration which dictates the behavior of the project which is being launched.|
 |`salt`|`bytes32`|A salt to use for the deterministic deployment.|
-|`suckerDeploymentConfiguration`|`REVSuckerDeploymentConfig`||
+|`suckerDeploymentConfiguration`|`JBSuckerDeploymentConfig`||
 
 **Returns**
 

@@ -4,37 +4,38 @@ pragma solidity 0.8.23;
 import {ERC2771Context} from "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 import {IERC721Receiver} from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import {Context} from "@openzeppelin/contracts/utils/Context.sol";
-import {IJB721TiersHook} from "@bananapus/721-hook/src/interfaces/IJB721TiersHook.sol";
-import {IJB721TiersHookDeployer} from "@bananapus/721-hook/src/interfaces/IJB721TiersHookProjectDeployer.sol";
-import {JBDeploy721TiersHookConfig} from "@bananapus/721-hook/src/structs/JBDeploy721TiersHookConfig.sol";
-import {JBLaunchProjectConfig} from "@bananapus/721-hook/src/structs/JBLaunchProjectConfig.sol";
-import {JBLaunchRulesetsConfig} from "@bananapus/721-hook/src/structs/JBLaunchRulesetsConfig.sol";
-import {JBPayDataHookRulesetConfig} from "@bananapus/721-hook/src/structs/JBPayDataHookRulesetConfig.sol";
-import {JBQueueRulesetsConfig} from "@bananapus/721-hook/src/structs/JBQueueRulesetsConfig.sol";
-import {JBPermissioned} from "@bananapus/core/src/abstract/JBPermissioned.sol";
-import {IJBController} from "@bananapus/core/src/interfaces/IJBController.sol";
-import {IJBPermissioned} from "@bananapus/core/src/interfaces/IJBPermissioned.sol";
-import {IJBProjects} from "@bananapus/core/src/interfaces/IJBProjects.sol";
-import {IJBRulesetDataHook} from "@bananapus/core/src/interfaces/IJBRulesetDataHook.sol";
-import {JBBeforeCashOutRecordedContext} from "@bananapus/core/src/structs/JBBeforeCashOutRecordedContext.sol";
+import {IJB721TiersHook} from "@bananapus/721-hook-v5/src/interfaces/IJB721TiersHook.sol";
+import {IJB721TiersHookDeployer} from "@bananapus/721-hook-v5/src/interfaces/IJB721TiersHookProjectDeployer.sol";
+import {JBDeploy721TiersHookConfig} from "@bananapus/721-hook-v5/src/structs/JBDeploy721TiersHookConfig.sol";
+import {JBLaunchProjectConfig} from "@bananapus/721-hook-v5/src/structs/JBLaunchProjectConfig.sol";
+import {JBLaunchRulesetsConfig} from "@bananapus/721-hook-v5/src/structs/JBLaunchRulesetsConfig.sol";
+import {JBPayDataHookRulesetConfig} from "@bananapus/721-hook-v5/src/structs/JBPayDataHookRulesetConfig.sol";
+import {JBQueueRulesetsConfig} from "@bananapus/721-hook-v5/src/structs/JBQueueRulesetsConfig.sol";
+import {JBPermissioned} from "@bananapus/core-v5/src/abstract/JBPermissioned.sol";
+import {IJBController} from "@bananapus/core-v5/src/interfaces/IJBController.sol";
+import {IJBPermissioned} from "@bananapus/core-v5/src/interfaces/IJBPermissioned.sol";
+import {IJBPermissions} from "@bananapus/core-v5/src/interfaces/IJBPermissions.sol";
+import {IJBProjects} from "@bananapus/core-v5/src/interfaces/IJBProjects.sol";
+import {IJBRulesetDataHook} from "@bananapus/core-v5/src/interfaces/IJBRulesetDataHook.sol";
+import {JBBeforeCashOutRecordedContext} from "@bananapus/core-v5/src/structs/JBBeforeCashOutRecordedContext.sol";
 
-import {JBBeforePayRecordedContext} from "@bananapus/core/src/structs/JBBeforePayRecordedContext.sol";
-import {JBCashOutHookSpecification} from "@bananapus/core/src/structs/JBCashOutHookSpecification.sol";
-import {JBPayHookSpecification} from "@bananapus/core/src/structs/JBPayHookSpecification.sol";
+import {JBBeforePayRecordedContext} from "@bananapus/core-v5/src/structs/JBBeforePayRecordedContext.sol";
+import {JBCashOutHookSpecification} from "@bananapus/core-v5/src/structs/JBCashOutHookSpecification.sol";
+import {JBPayHookSpecification} from "@bananapus/core-v5/src/structs/JBPayHookSpecification.sol";
 
-import {JBPermissionsData} from "@bananapus/core/src/structs/JBPermissionsData.sol";
-import {JBPayDataHookRulesetMetadata} from "@bananapus/721-hook/src/structs/JBPayDataHookRulesetMetadata.sol";
-import {JBRulesetConfig} from "@bananapus/core/src/structs/JBRulesetConfig.sol";
-import {JBRulesetMetadata} from "@bananapus/core/src/structs/JBRulesetMetadata.sol";
-import {JBRuleset} from "@bananapus/core/src/structs/JBRuleset.sol";
-import {JBTerminalConfig} from "@bananapus/core/src/structs/JBTerminalConfig.sol";
-import {IJBSuckerRegistry} from "@bananapus/suckers/src/interfaces/IJBSuckerRegistry.sol";
-import {JBPermissionIds} from "@bananapus/permission-ids/src/JBPermissionIds.sol";
-import {REVSuckerDeploymentConfig} from "@rev-net/core/src/structs/REVSuckerDeploymentConfig.sol";
+import {JBPermissionsData} from "@bananapus/core-v5/src/structs/JBPermissionsData.sol";
+import {JBPayDataHookRulesetMetadata} from "@bananapus/721-hook-v5/src/structs/JBPayDataHookRulesetMetadata.sol";
+import {JBRulesetConfig} from "@bananapus/core-v5/src/structs/JBRulesetConfig.sol";
+import {JBRulesetMetadata} from "@bananapus/core-v5/src/structs/JBRulesetMetadata.sol";
+import {JBRuleset} from "@bananapus/core-v5/src/structs/JBRuleset.sol";
+import {JBTerminalConfig} from "@bananapus/core-v5/src/structs/JBTerminalConfig.sol";
+import {IJBSuckerRegistry} from "@bananapus/suckers-v5/src/interfaces/IJBSuckerRegistry.sol";
+import {JBOwnable} from "@bananapus/ownable-v5/src/JBOwnable.sol";
+import {JBPermissionIds} from "@bananapus/permission-ids-v5/src/JBPermissionIds.sol";
 
 import {IJBOmnichainDeployer} from "./interfaces/IJBOmnichainDeployer.sol";
 import {JBDeployerHookConfig} from "./structs/JBDeployerHookConfig.sol";
-import {JBOwnable} from "@bananapus/ownable/src/JBOwnable.sol";
+import {JBSuckerDeploymentConfig} from "./structs/JBSuckerDeploymentConfig.sol";
 
 /// @notice Deploys, manages, and operates Juicebox projects with suckers.
 contract JBOmnichainDeployer is
@@ -45,11 +46,16 @@ contract JBOmnichainDeployer is
     IERC721Receiver
 {
     //*********************************************************************//
-    // --------------- public immutable stored properties ---------------- //
+    // ------------------------------ errors ------------------------------ //
     //*********************************************************************//
 
-    /// @notice The controller used to create and manage Juicebox projects.
-    IJBController public immutable CONTROLLER;
+    /// @notice Thrown when a data hook is set to this contract.
+    error JBOmnichainDeployer_InvalidHook();
+    error JBOmnichainDeployer_UnexpectedNFTReceived();
+
+    //*********************************************************************//
+    // --------------- public immutable stored properties ---------------- //
+    //*********************************************************************//
 
     /// @notice Mints ERC-721s that represent Juicebox project ownership and transfers.
     IJBProjects public immutable PROJECTS;
@@ -67,27 +73,28 @@ contract JBOmnichainDeployer is
     /// @notice Each project's data hook provided on deployment.
     /// @custom:param projectId The ID of the project to get the data hook for.
     /// @custom:param rulesetId The ID of the ruleset to get the data hook for.
-    mapping(uint256 projectId => mapping(uint256 rulesetId => JBDeployerHookConfig)) public override dataHookOf;
+    mapping(uint256 projectId => mapping(uint256 rulesetId => JBDeployerHookConfig)) internal _dataHookOf;
 
     //*********************************************************************//
     // -------------------------- constructor ---------------------------- //
     //*********************************************************************//
 
-    /// @param controller The controller to use for launching and operating the Juicebox projects.
     /// @param suckerRegistry The registry to use for deploying and tracking each project's suckers.
     /// @param hookDeployer The deployer to use for project's tiered ERC-721 hooks.
+    /// @param permissions The permissions to use for the contract.
+    /// @param projects The projects to use for the contract.
     /// @param trustedForwarder The trusted forwarder for the ERC2771Context.
     constructor(
-        IJBController controller,
         IJBSuckerRegistry suckerRegistry,
         IJB721TiersHookDeployer hookDeployer,
+        IJBPermissions permissions,
+        IJBProjects projects,
         address trustedForwarder
     )
-        JBPermissioned(IJBPermissioned(address(controller)).PERMISSIONS())
+        JBPermissioned(permissions)
         ERC2771Context(trustedForwarder)
     {
-        CONTROLLER = controller;
-        PROJECTS = controller.PROJECTS();
+        PROJECTS = projects;
         SUCKER_REGISTRY = suckerRegistry;
         HOOK_DEPLOYER = hookDeployer;
 
@@ -119,10 +126,10 @@ contract JBOmnichainDeployer is
         external
         view
         override
-        returns (uint256 weight, JBPayHookSpecification[] memory hookSpecifications)
+        returns (uint256, JBPayHookSpecification[] memory hookSpecifications)
     {
         // Fetch the datahook for the ruleset.
-        JBDeployerHookConfig memory hook = dataHookOf[context.projectId][context.rulesetId];
+        JBDeployerHookConfig memory hook = _dataHookOf[context.projectId][context.rulesetId];
 
         // If no data hook is set, return the original values.
         if (address(hook.dataHook) == address(0) || !hook.useDataHookForPay) {
@@ -130,6 +137,7 @@ contract JBOmnichainDeployer is
         }
 
         // Otherwise, forward the call to the datahook.
+        // slither-disable-next-line unused-return
         return hook.dataHook.beforePayRecordedWith(context);
     }
 
@@ -145,12 +153,7 @@ contract JBOmnichainDeployer is
         external
         view
         override
-        returns (
-            uint256 cashOutTaxRate,
-            uint256 cashOutCount,
-            uint256 totalSupply,
-            JBCashOutHookSpecification[] memory hookSpecifications
-        )
+        returns (uint256, uint256, uint256, JBCashOutHookSpecification[] memory hookSpecifications)
     {
         // If the cash out is from a sucker, return the full cash out amount without taxes or fees.
         if (SUCKER_REGISTRY.isSuckerOf(context.projectId, context.holder)) {
@@ -158,7 +161,7 @@ contract JBOmnichainDeployer is
         }
 
         // Fetch the datahook for the ruleset.
-        JBDeployerHookConfig memory hook = dataHookOf[context.projectId][context.rulesetId];
+        JBDeployerHookConfig memory hook = _dataHookOf[context.projectId][context.rulesetId];
 
         // If no data hook is set, or the data hook is not used for cash outs, return the original values.
         if (address(hook.dataHook) == address(0) || !hook.useDataHookForCashOut) {
@@ -166,23 +169,52 @@ contract JBOmnichainDeployer is
         }
 
         // If the ruleset has a data hook, forward the call to the datahook.
+        // slither-disable-next-line unused-return
         return hook.dataHook.beforeCashOutRecordedWith(context);
+    }
+
+    /// @notice Get the data hook for a project and ruleset.
+    /// @custom:param projectId The ID of the project to get the data hook for.
+    /// @custom:param rulesetId The ID of the ruleset to get the data hook for.
+    /// @return useDataHookForPay Whether the data hook is used for pay.
+    /// @return useDataHookForCashout Whether the data hook is used for cashout.
+    /// @return dataHook The data hook.
+    function dataHookOf(
+        uint256 projectId,
+        uint256 rulesetId
+    )
+        external
+        view
+        override
+        returns (bool useDataHookForPay, bool useDataHookForCashout, IJBRulesetDataHook dataHook)
+    {
+        JBDeployerHookConfig memory hook = _dataHookOf[projectId][rulesetId];
+        return (hook.useDataHookForPay, hook.useDataHookForCashOut, hook.dataHook);
     }
 
     /// @notice A flag indicating whether an address has permission to mint a project's tokens on-demand.
     /// @dev A project's data hook can allow any address to mint its tokens.
     /// @param projectId The ID of the project whose token can be minted.
+    /// @param ruleset The ruleset to check the token minting permission of.
     /// @param addr The address to check the token minting permission of.
     /// @return flag A flag indicating whether the address has permission to mint the project's tokens on-demand.
-    function hasMintPermissionFor(uint256 projectId, address addr) external view returns (bool flag) {
+    function hasMintPermissionFor(
+        uint256 projectId,
+        JBRuleset memory ruleset,
+        address addr
+    )
+        external
+        view
+        override
+        returns (bool flag)
+    {
         // If the address is a sucker for this project.
         if (SUCKER_REGISTRY.isSuckerOf(projectId, addr)) {
             return true;
         }
 
         // Get the current ruleset of the project.
-        (JBRuleset memory ruleset,) = CONTROLLER.currentRulesetOf(projectId);
-        JBDeployerHookConfig memory hook = dataHookOf[projectId][ruleset.id];
+        JBDeployerHookConfig memory hook = _dataHookOf[projectId][ruleset.id];
 
         // If no data hook is set, return false.
         if (address(hook.dataHook) == address(0)) {
@@ -190,7 +222,7 @@ contract JBOmnichainDeployer is
         }
 
         // Forward the call to the datahook.
-        return hook.dataHook.hasMintPermissionFor(projectId, addr);
+        return hook.dataHook.hasMintPermissionFor(projectId, ruleset, addr);
     }
 
     //*********************************************************************//
@@ -215,9 +247,10 @@ contract JBOmnichainDeployer is
     /// @param suckerDeploymentConfiguration The suckers to set up for the project.
     function deploySuckersFor(
         uint256 projectId,
-        REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+        JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration
     )
         external
+        override
         returns (address[] memory suckers)
     {
         // Enforce permissions.
@@ -248,6 +281,7 @@ contract JBOmnichainDeployer is
     /// @param memo A memo to pass along to the emitted event.
     /// @param suckerDeploymentConfiguration The suckers to set up for the project. Suckers facilitate cross-chain
     /// token transfers between peer projects on different networks.
+    /// @param controller The controller to use for launching the project.
     /// @return projectId The project's ID.
     function launchProjectFor(
         address owner,
@@ -255,9 +289,11 @@ contract JBOmnichainDeployer is
         JBRulesetConfig[] memory rulesetConfigurations,
         JBTerminalConfig[] calldata terminalConfigurations,
         string calldata memo,
-        REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+        JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration,
+        IJBController controller
     )
         external
+        override
         returns (uint256 projectId, address[] memory suckers)
     {
         // Get the next project ID.
@@ -268,7 +304,7 @@ contract JBOmnichainDeployer is
         // Launch the project.
         assert(
             projectId
-                == CONTROLLER.launchProjectFor({
+                == controller.launchProjectFor({
                     owner: address(this),
                     projectUri: projectUri,
                     rulesetConfigurations: rulesetConfigurations,
@@ -299,6 +335,8 @@ contract JBOmnichainDeployer is
     /// deployed.
     /// @param launchProjectConfig Configuration which dictates the behavior of the project which is being launched.
     /// @param salt A salt to use for the deterministic deployment.
+    /// @param suckerDeploymentConfiguration The suckers to set up for the project. Suckers facilitate cross-chain
+    /// @param controller The controller to use for launching the project.
     /// @return projectId The ID of the newly launched project.
     /// @return hook The 721 tiers hook that was deployed for the project.
     function launch721ProjectFor(
@@ -306,9 +344,11 @@ contract JBOmnichainDeployer is
         JBDeploy721TiersHookConfig calldata deployTiersHookConfig,
         JBLaunchProjectConfig calldata launchProjectConfig,
         bytes32 salt,
-        REVSuckerDeploymentConfig calldata suckerDeploymentConfiguration
+        JBSuckerDeploymentConfig calldata suckerDeploymentConfiguration,
+        IJBController controller
     )
         external
+        override
         returns (uint256 projectId, IJB721TiersHook hook, address[] memory suckers)
     {
         // Get the next project ID.
@@ -322,12 +362,16 @@ contract JBOmnichainDeployer is
         });
 
         // Convert the 721 ruleset configurations to regular ruleset configurations.
-        JBRulesetConfig[] memory rulesetConfigurations = _from721Config(launchProjectConfig.rulesetConfigurations, hook);
+        // Then modify the ruleset configurations to use this deployer as a wrapper for the datasouce.
+        JBRulesetConfig[] memory rulesetConfigurations = _setup({
+            projectId: projectId,
+            rulesetConfigurations: _from721Config(launchProjectConfig.rulesetConfigurations, hook)
+        });
 
         // Launch the project, and sanity check the project ID.
         assert(
             projectId
-                == CONTROLLER.launchProjectFor({
+                == controller.launchProjectFor({
                     owner: address(this),
                     projectUri: launchProjectConfig.projectUri,
                     rulesetConfigurations: rulesetConfigurations,
@@ -359,14 +403,17 @@ contract JBOmnichainDeployer is
     /// @param rulesetConfigurations The rulesets to launch.
     /// @param terminalConfigurations The terminals to set up for the project.
     /// @param memo A memo to pass along to the emitted event.
+    /// @param controller The controller to use for launching the rulesets.
     /// @return rulesetId The ID of the newly launched rulesets.
     function launchRulesetsFor(
         uint256 projectId,
         JBRulesetConfig[] calldata rulesetConfigurations,
         JBTerminalConfig[] calldata terminalConfigurations,
-        string calldata memo
+        string calldata memo,
+        IJBController controller
     )
         external
+        override
         returns (uint256)
     {
         // Enforce permissions.
@@ -382,7 +429,7 @@ contract JBOmnichainDeployer is
             permissionId: JBPermissionIds.SET_TERMINALS
         });
 
-        return CONTROLLER.launchRulesetsFor({
+        return controller.launchRulesetsFor({
             projectId: projectId,
             rulesetConfigurations: _setup({projectId: projectId, rulesetConfigurations: rulesetConfigurations}),
             terminalConfigurations: terminalConfigurations,
@@ -407,6 +454,7 @@ contract JBOmnichainDeployer is
         bytes32 salt
     )
         external
+        override
         returns (uint256 rulesetId, IJB721TiersHook hook)
     {
         // Enforce permissions.
@@ -452,13 +500,16 @@ contract JBOmnichainDeployer is
     /// @param projectId The ID of the project to queue the rulesets for.
     /// @param rulesetConfigurations The rulesets to queue.
     /// @param memo A memo to pass along to the emitted event.
+    /// @param controller The controller to use for queuing the rulesets.
     /// @return rulesetId The ID of the newly queued rulesets.
     function queueRulesetsOf(
         uint256 projectId,
         JBRulesetConfig[] calldata rulesetConfigurations,
-        string calldata memo
+        string calldata memo,
+        IJBController controller
     )
         external
+        override
         returns (uint256)
     {
         // Enforce permissions.
@@ -468,7 +519,7 @@ contract JBOmnichainDeployer is
             permissionId: JBPermissionIds.QUEUE_RULESETS
         });
 
-        return CONTROLLER.queueRulesetsOf({
+        return controller.queueRulesetsOf({
             projectId: projectId,
             rulesetConfigurations: _setup({projectId: projectId, rulesetConfigurations: rulesetConfigurations}),
             memo: memo
@@ -491,6 +542,7 @@ contract JBOmnichainDeployer is
         bytes32 salt
     )
         external
+        override
         returns (uint256 rulesetId, IJB721TiersHook hook)
     {
         // Enforce permissions.
@@ -525,7 +577,7 @@ contract JBOmnichainDeployer is
     /// @dev Make sure this contract can only receive project NFTs from `JBProjects`.
     function onERC721Received(address, address, uint256, bytes calldata) external view returns (bytes4) {
         // Make sure the 721 received is from the `JBProjects` contract.
-        if (msg.sender != address(PROJECTS)) revert();
+        if (msg.sender != address(PROJECTS)) revert JBOmnichainDeployer_UnexpectedNFTReceived();
 
         return IERC721Receiver.onERC721Received.selector;
     }
@@ -546,8 +598,11 @@ contract JBOmnichainDeployer is
         returns (JBRulesetConfig[] memory)
     {
         for (uint256 i; i < rulesetConfigurations.length; i++) {
+            // Make sure there's no infinite loop.
+            if (rulesetConfigurations[i].metadata.dataHook == address(this)) revert JBOmnichainDeployer_InvalidHook();
+
             // Store the data hook.
-            dataHookOf[projectId][block.timestamp + i] = JBDeployerHookConfig({
+            _dataHookOf[projectId][block.timestamp + i] = JBDeployerHookConfig({
                 useDataHookForPay: rulesetConfigurations[i].metadata.useDataHookForPay,
                 useDataHookForCashOut: rulesetConfigurations[i].metadata.useDataHookForCashOut,
                 dataHook: IJBRulesetDataHook(rulesetConfigurations[i].metadata.dataHook)
